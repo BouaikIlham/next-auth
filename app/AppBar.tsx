@@ -21,6 +21,9 @@ const AppBar = () => {
             <button className="text-red-500">
               Sign Out
             </button>
+            <Link className="text-yellow-500" href={"/auth/login"}>
+                test
+            </Link>
           </>
    
           <button className="text-green-600">
