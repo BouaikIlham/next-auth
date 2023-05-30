@@ -1,11 +1,33 @@
 'use client'
-import { useRef } from "react"
-const loginPage = () => {
+import {useState } from "react";
+import axios from "axios"
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-    const onSubmit = async () => {
+const loginPage = () => {
+   const [isLoading, setIsLoading] = useState(false);
+
+    const {register, handleSubmit} = useForm<FieldValues>({
+      defaultValues: {
+        name: "",
+        email:"",
+        password:""
+      }
+    })
+    
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+      console.log(data)
+      setIsLoading(true);
+      axios.post("/api/register", data)
+      .then(() => {
+        alert("register successflly")
+      })
+      .catch((error) => {
+        alert(error)
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
     }
-    const userName = useRef("")
-    const password = useRef("")
   return (
     <form className={"flex flex-col justify-center items-center  h-screen bg-slate-500"}>
       {/* <p className="text-red-700 bg-red-100 py-2 px-5 rounded-md"></p> */}
@@ -14,16 +36,24 @@ const loginPage = () => {
               className="block text-gray-600  mb-2 text-xs lg:text-sm xl:text-base">
             User name
         </label>
-        <input  onChange={(e) => (userName.current === e.target.value)}
+        <input  {...register("name")} type="name"
                 autoComplete="off"
                 className="border border-slate-400 disabled:border-slate-100 w-full block outline-none py-2 px-1 transition-all text-xs lg:text-sm xl:text-base  bg-slate-50 focus:shadow focus:shadow-blue-500"
          />
-        <label className="block text-gray-600  mb-2 text-xs lg:text-sm xl:text-base">password</label>
-        <input  onChange={(e) => (password.current === e.target.value)}
+         <label
+              className="block text-gray-600  mb-2 text-xs lg:text-sm xl:text-base">
+            Email
+        </label>
+        <input  {...register("email")} type="email"
+                autoComplete="off"
+                className="border border-slate-400 disabled:border-slate-100 w-full block outline-none py-2 px-1 transition-all text-xs lg:text-sm xl:text-base  bg-slate-50 focus:shadow focus:shadow-blue-500"
+         />
+        <label className="block text-gray-600  mb-2 text-xs lg:text-sm xl:text-base">Password</label>
+        <input {...register("password")} type="password"
                 autoComplete="off"
                 className="border border-slate-400 disabled:border-slate-100 w-full block outline-none py-2 px-1 transition-all text-xs lg:text-sm xl:text-base  bg-slate-50 focus:shadow focus:shadow-blue-500"
          />        
-        <button onClick={onSubmit}>Login</button>
+        <button onClick={handleSubmit(onSubmit)}>Login</button>
       </div>
     </form>
   )
