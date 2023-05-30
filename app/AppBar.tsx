@@ -1,13 +1,13 @@
 'use client'
 import Link from "next/link"
 import { signIn } from "next-auth/react"
-const AppBar = () => {
+
+const AppBar =  () => {
   return (
     <div className="bg-gradient-to-b from-cyan-50 to-cyan-200 p-2 flex gap-5 ">
       <Link className="text-sky-600 hover:text-sky-700" href={"/"}>
         Home
       </Link>
-
       <Link className="text-sky-600 hover:text-sky-700" href={"/admin/panel"}>
         Admin Panel
       </Link>
@@ -18,9 +18,9 @@ const AppBar = () => {
         
           <>
             <p className="text-sky-600"> user name</p>
-            {/* <button className="text-red-500">
+            <button className="text-red-500">
               Sign Out
-            </button> */}
+            </button>
           </>
    
           <button className="text-green-600" onClick={() => signIn()}>

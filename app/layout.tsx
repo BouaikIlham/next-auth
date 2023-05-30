@@ -1,7 +1,6 @@
 import AppBar from './AppBar'
 import './globals.css'
 import { Inter } from 'next/font/google'
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -10,19 +9,19 @@ export const metadata = {
 }
 
 export default function RootLayout({
-  children,
-  session
+  children
 }: {
   children: React.ReactNode
-  session:any
 }) {
+ 
   return (
+    
     <html lang="en">
       <body className={inter.className} >
-        <AppBar />
-        <div className="h-screen">
-          {children}
-        </div>
+          <AppBar />
+          <div className="h-screen">
+            {children}
+          </div>
       </body>
     </html>
   )

@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
-          name: 'Credentials',
+          name: 'credentials',
           credentials: {
             email: { label: "Username", type: "text", placeholder: "jsmith" },
             password: { label: "Password", type: "password" }
@@ -37,15 +37,23 @@ export const authOptions: NextAuthOptions = {
             
             return user
           },
+          
         }),
+        
       ],
+
+      
 
       session: {
         strategy:"jwt"
       },
       pages: {
         signIn:"/auth/login"
-      }
+      },
+      debug: process.env.NODE_ENV === 'development',
+
+      secret: process.env.NEXTAUTH_SECRET
+
 }
 
 export default NextAuth(authOptions)
