@@ -1,13 +1,10 @@
 'use client'
-
-import {useState } from "react";
 // import axios from "axios"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 const loginPage = () => {
    
-   const [isLoading, setIsLoading] = useState(false);
    const router = useRouter()
     const {register, handleSubmit} = useForm<FieldValues>({
       defaultValues: {
@@ -35,9 +32,7 @@ const loginPage = () => {
         ...data,
         redirect: false
       })
-      alert('Logged in');
-      router.push('/')
-      setIsLoading(false)
+      router.push("/")
     }
   return (
     <form className={"flex flex-col justify-center items-center  h-screen bg-slate-500"}>
