@@ -2,7 +2,9 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div className="flex justify-center items-center p-5 green-red-500 text-lg font-bold">
+      only for users
+    </div>
   )
 }
 

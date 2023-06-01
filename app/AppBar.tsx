@@ -14,8 +14,8 @@ const AppBar = () => {
       <Link className="text-sky-600 hover:text-sky-700" href={"/admin"}>
         Admin
       </Link>
-      <Link className="text-sky-600 hover:text-sky-700" href={"/admin/panel"}>
-        User Panel
+      <Link className="text-sky-600 hover:text-sky-700" href={"/user"}>
+        User 
       </Link>
       <div className="ml-auto flex gap-2">
         <p className="text-sky-600">{session?.user?.name}</p>
