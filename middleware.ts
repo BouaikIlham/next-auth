@@ -7,7 +7,7 @@ export default withAuth(
     console.log(req.nextauth.token?.role);
     if (
         req.nextUrl.pathname === "/admin" &&
-        req.nextauth.token?.role !== "admin"
+        req.nextauth.token?.role !== "ADMIN"
     ) {
         return new NextResponse("You are  not authorized")
     }
