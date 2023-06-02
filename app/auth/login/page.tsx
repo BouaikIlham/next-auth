@@ -1,5 +1,5 @@
 'use client'
-// import axios from "axios"
+import axios from "axios"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -15,24 +15,20 @@ const loginPage = () => {
     })
     
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-      // console.log(data)
-      // setIsLoading(true);
-      // axios.post("/api/register", data)
-      // .then(() => {
-      //   alert("register successflly")
-      //   router.push("/")
-      // })
-      // .catch((error) => {
-      //   alert(error)
-      // })
-      // .finally(() => {
-      //   setIsLoading(false);
-      // });
-      signIn("credentials", {
-        ...data,
-        redirect: false
+      axios.post("/api/register", data)
+      .then(() => {
+        alert("register successflly")
+        router.push("/")
       })
-      router.push("/")
+      .catch((error) => {
+        alert(error)
+      })
+
+      // signIn("credentials", {
+      //   ...data,
+      //   redirect: false
+      // })
+      // router.push("/")
     }
   return (
     <form className={"flex flex-col justify-center items-center  h-screen bg-slate-500"}>

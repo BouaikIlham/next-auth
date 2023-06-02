@@ -41,14 +41,18 @@ export const authOptions: NextAuthOptions = {
         }),
         
       ],
-
       
-
-      
-
-      session: {
-        strategy:"jwt"
+      callbacks: {
+        async jwt({ token }) {
+          // token.role = "member";
+          return token;
+        },
+        async session({ session, token, user }) {
+          return session // The return type will match the one returned in `useSession()`
+        },
       },
+
+     
       pages: {
         signIn:"/auth/login"
       },
