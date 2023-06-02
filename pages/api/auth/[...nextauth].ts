@@ -1,8 +1,9 @@
-import { NextAuthOptions } from "next-auth"
+import { NextAuthOptions, User } from "next-auth"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt"
 import { PrismaClient } from '@prisma/client'
+import { JWT } from "next-auth/jwt"
 
 const prisma = new PrismaClient()
 export const authOptions: NextAuthOptions = {
@@ -43,11 +44,14 @@ export const authOptions: NextAuthOptions = {
       ],
       
       callbacks: {
-        async jwt({ token, user }) {
-          token.role = "member"
+        async jwt({ token, user }: { token: JWT, user?: User | null }) {
+          if (user) {
+            token.role = user.role;
+          }
           return token;
         },
         async session({ session, token, user }) {
+          session.user = token
           return session // The return type will match the one returned in `useSession()`
         },
       },
